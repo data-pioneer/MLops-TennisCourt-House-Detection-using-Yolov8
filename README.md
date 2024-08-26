@@ -63,7 +63,7 @@ aws configure
 ## How to run?
 
 ```bash
-conda create -n TennisCourtHouse python=3.11.9 -y
+conda create -n TennisCourtHouse python=3.9 -y
 ```
 
 ```bash
