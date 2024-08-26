@@ -1,10 +1,11 @@
-# ISD: Real-Time AI-powered Safety Gear Detection System
+TCH# I: Tennis Court and Houses AI-powered Detection System
 
-ISD is an AI-powered computer vision system designed to monitor, track, and enforce workplace safety gear compliance. It utilizes real-time image analysis to identify five essential safety items: helmet, gloves, jacket, goggles, and footwear. ISD verifies if personnel are wearing these items before granting access to the work area. For implementation of Industry saftey Yolo7 model of computer vision is used, which has smaller size. 
+TCH is an AI-powered computer vision system designed to detect orintation of loation as well as orientation of tennis court and houses. For implementation of TCH yolo8 model with oriented bounding boxes of computer vision is used, which has smaller size. 
 
-- Yolov7 Github repo link (https://github.com/WongKinYiu/yolov7)
+- Annotated and Downloaded image data from Roboflow (https://universe.roboflow.com/learningworkspace-zrodd/object_detection_tennis_house)
+- Implementation guide (https://docs.ultralytics.com/tasks/obb/#how-do-i-validate-the-accuracy-of-a-yolov8n-obb-model)
 
-# Flow Diaglram of MLops pipeline
+# Flow Diagram of MLops pipeline
 
 ![MLops_ISD_Architexture_Flow_Diagram](https://github.com/data-pioneer/MLops-Industry-Safety-Detection-using-Yolov7/assets/33811437/681cbdbb-8d95-4308-9b6b-3225c81c1488)
 
