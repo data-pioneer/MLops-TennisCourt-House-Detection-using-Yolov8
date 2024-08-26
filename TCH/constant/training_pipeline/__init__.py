@@ -8,10 +8,9 @@ DATA_INGESTION_DIR_NAME: str = "data_ingestion"
 
 DATA_INGESTION_FEATURE_STORE_DIR: str = "feature_store"
 
-DATA_INGESTION_S3_DATA_NAME: str = "isd_data_mini.zip"
+DATA_INGESTION_S3_DATA_NAME: str = "data.zip"
 
-DATA_BUCKET_NAME = "bhav-isd-data-24"
-# DATA_BUCKET_NAME = "isda-data-24"
+DATA_BUCKET_NAME = "bhav-tch-data-24"
 
 
 """
@@ -43,6 +42,6 @@ MODEL_TRAINER_BATCH_SIZE: int = 8
 """
 MODEL PUSHER related constant start with MODEL_PUSHER var name
 """
-MODEL_BUCKET_NAME = "bhav-isd-data-24"
+MODEL_BUCKET_NAME = "bhav-tch-data-24"
 S3_MODEL_NAME = "best.pt"
 

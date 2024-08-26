@@ -1,6 +1,6 @@
 import sys, os
 from TCH.logger import logging
-from TCH.exception import isdException
+from TCH.exception import TCHException
 from TCH.configuration.s3_operations import S3Operation
 from TCH.components.data_ingestion import DataIngestion
 from TCH.components.data_validation import DataValidation
@@ -23,10 +23,10 @@ from TCH.entity.artifacts_entity import (DataIngestionArtifact,
 class TrainPipeline:
     def __init__(self):
         self.data_ingestion_config = DataIngestionConfig()
-        # self.data_validation_config = DataValidationConfig()
-        # self.model_trainer_config = ModelTrainerConfig()
-        # self.model_pusher_config = ModelPusherConfig()
-        # self.s3_operations = S3Operation()
+        self.data_validation_config = DataValidationConfig()
+        self.model_trainer_config = ModelTrainerConfig()
+        self.model_pusher_config = ModelPusherConfig()
+        self.s3_operations = S3Operation()
 
 
     
@@ -50,7 +50,7 @@ class TrainPipeline:
             return data_ingestion_artifact
 
         except Exception as e:
-            raise isdException(e, sys)
+            raise TCHException(e, sys)
         
 
     
@@ -77,7 +77,7 @@ class TrainPipeline:
             return data_validation_artifact
 
         except Exception as e:
-            raise isdException(e, sys) from e
+            raise TCHException(e, sys) from e
         
 
     
@@ -91,7 +91,7 @@ class TrainPipeline:
             return model_trainer_artifact
 
         except Exception as e:
-            raise isdException(e, sys)
+            raise TCHException(e, sys)
         
 
     
@@ -108,7 +108,7 @@ class TrainPipeline:
             model_pusher_artifact = model_pusher.initiate_model_pusher()
             return model_pusher_artifact
         except Exception as e:
-            raise isdException(e, sys)
+            raise TCHException(e, sys)
         
 
     
@@ -116,14 +116,14 @@ class TrainPipeline:
     def run_pipeline(self) -> None:
         try:
             data_ingestion_artifact = self.start_data_ingestion()
-            # data_validation_artifact = self.start_data_validation(data_ingestion_artifact=data_ingestion_artifact )
-            # if data_validation_artifact.validation_status == True:
-            #    model_trainer_artifact = self.start_model_trainer()
-            #    model_pusher_artifact = self.start_model_pusher(model_trainer_artifact=model_trainer_artifact,s3=self.s3_operations)
+            data_validation_artifact = self.start_data_validation(data_ingestion_artifact=data_ingestion_artifact )
+            if data_validation_artifact.validation_status == True:
+               model_trainer_artifact = self.start_model_trainer()
+               model_pusher_artifact = self.start_model_pusher(model_trainer_artifact=model_trainer_artifact,s3=self.s3_operations)
             
-            # else:
-            #    raise Exception("Your data is not in correct format")
+            else:
+               raise Exception("Your data is not in correct format")
 
 
         except Exception as e:
-            raise isdException(e, sys)
+            raise TCHException(e, sys)

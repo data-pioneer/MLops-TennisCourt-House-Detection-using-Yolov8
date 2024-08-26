@@ -5,7 +5,7 @@ from typing import List, Union
 from TCH.constant import *
 import boto3
 import pickle
-from TCH.exception import isdException
+from TCH.exception import TCHException
 from botocore.exceptions import ClientError
 from mypy_boto3_s3.service_resource import Bucket
 from pandas import DataFrame, read_csv
@@ -52,7 +52,7 @@ class S3Operation:
             return conv_func()
 
         except Exception as e:
-            raise isdException(e, sys) from e
+            raise TCHException(e, sys) from e
 
     def get_bucket(self, bucket_name: str) -> Bucket:
 
@@ -70,7 +70,7 @@ class S3Operation:
             return bucket
 
         except Exception as e:
-            raise isdException(e, sys) from e
+            raise TCHException(e, sys) from e
 
 
     def is_model_present(self, bucket_name: str, s3_model_key: str) -> bool:
@@ -94,7 +94,7 @@ class S3Operation:
                 return False
 
         except Exception as e:
-            raise isdException(e, sys) from e
+            raise TCHException(e, sys) from e
 
 
     def get_file_object(
@@ -118,7 +118,7 @@ class S3Operation:
             return file_objs
 
         except Exception as e:
-            raise isdException(e, sys) from e
+            raise TCHException(e, sys) from e
 
 
     def load_model(
@@ -148,7 +148,7 @@ class S3Operation:
             return model
 
         except Exception as e:
-            raise isdException(e, sys) from e
+            raise TCHException(e, sys) from e
 
 
     def create_folder(self, folder_name: str, bucket_name: str) -> None:
@@ -209,7 +209,7 @@ class S3Operation:
             logging.info("Exited the upload_file method of S3Operations class")
 
         except Exception as e:
-            raise isdException(e, sys) from e
+            raise TCHException(e, sys) from e
 
     def upload_folder(self, folder_name: str, bucket_name: str) -> None:
 
@@ -230,7 +230,7 @@ class S3Operation:
             logging.info("Exited the upload_folder method of S3Operations class")
 
         except Exception as e:
-            raise isdException(e, sys) from e
+            raise TCHException(e, sys) from e
 
     def upload_df_as_csv(
         self,
@@ -254,7 +254,7 @@ class S3Operation:
             logging.info("Exited the upload_df_as_csv method of S3Operations class")
 
         except Exception as e:
-            raise isdException(e, sys) from e
+            raise TCHException(e, sys) from e
 
     def get_df_from_object(self, object_: object) -> DataFrame:
 
@@ -274,7 +274,7 @@ class S3Operation:
             return df
 
         except Exception as e:
-            raise isdException(e, sys) from e
+            raise TCHException(e, sys) from e
 
     def read_csv(self, filename: str, bucket_name: str) -> DataFrame:
 
@@ -294,4 +294,4 @@ class S3Operation:
             return df
 
         except Exception as e:
-            raise isdException(e, sys) from e
+            raise TCHException(e, sys) from e

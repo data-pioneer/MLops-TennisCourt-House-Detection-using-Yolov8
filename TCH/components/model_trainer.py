@@ -3,7 +3,7 @@ import yaml
 from TCH.utils.main_utils import read_yaml_file
 from six.moves import urllib
 from TCH.logger import logging
-from TCH.exception import isdException
+from TCH.exception import TCHException
 from TCH.constant.training_pipeline import *
 from TCH.entity.config_entity import ModelTrainerConfig
 from TCH.entity.artifacts_entity import ModelTrainerArtifact
@@ -53,14 +53,14 @@ class ModelTrainer:
 
 
             #training
-            os.system(f"cd yolov7 && python train.py --batch {self.model_trainer_config.batch_size} --cfg cfg/training/custom_yolov7.yaml --epochs {self.model_trainer_config.no_epochs} --data data/custom.yaml --weights 'yolov7.pt'")
+            os.system(f"cd yolov8 && python train.py --batch {self.model_trainer_config.batch_size} --cfg cfg/training/custom_yolov8.yaml --epochs {self.model_trainer_config.no_epochs} --data data/custom.yaml --weights 'yolov8n-obb.pt'")
 
 
-            os.system("cp yolov7/runs/train/exp/weights/best.pt yolov7/")
+            os.system("cp yolov8/runs/train/exp/weights/best.pt yolov8/")
             os.makedirs(self.model_trainer_config.model_trainer_dir, exist_ok=True)
             os.system(f"cp yolov7/runs/train/exp/weights/best.pt {self.model_trainer_config.model_trainer_dir}/")
 
-            os.system("rm -rf yolov7/runs")
+            os.system("rm -rf yolov8/runs")
             os.system("rm -rf images")
             os.system("rm -rf labels")
             os.system("rm -rf classes.names")
@@ -71,7 +71,7 @@ class ModelTrainer:
 
 
             model_trainer_artifact = ModelTrainerArtifact(
-                trained_model_file_path="yolov7/best.pt",
+                trained_model_file_path="yolov8/best.pt",
             )
 
             logging.info("Exited initiate_model_trainer method of ModelTrainer class")
@@ -85,5 +85,5 @@ class ModelTrainer:
 
 
         except Exception as e:
-            raise isdException(e, sys)
+            raise TCHException(e, sys)
 

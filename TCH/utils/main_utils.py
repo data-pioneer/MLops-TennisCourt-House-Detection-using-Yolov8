@@ -3,8 +3,8 @@ import sys
 import yaml
 import base64
 
-from isd.exception import isdException
-from isd.logger import logging
+from TCH.exception import TCHException
+from TCH.logger import logging
 
 
 def read_yaml_file(file_path: str) -> dict:
@@ -14,7 +14,7 @@ def read_yaml_file(file_path: str) -> dict:
             return yaml.safe_load(yaml_file)
 
     except Exception as e:
-        raise isdException(e, sys) from e
+        raise TCHException(e, sys) from e
 
 
 def decodeImage(imgstring, fileName):
